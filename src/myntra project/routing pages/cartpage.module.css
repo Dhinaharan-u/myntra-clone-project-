@@ -1,0 +1,46 @@
+.productitems{
+    display: flex;
+    align-items: center;
+   margin-top: 10px;
+   padding: 0px;
+   border: 1px solid black;
+    width:600px;
+    border-radius: 10px;
+    
+}
+.productimage{
+
+    height: 308px;
+    width: 300px;
+    margin-left: 2px;
+   
+   
+}
+.cartdetail{
+    margin-left: 15px;
+}
+.products{
+    margin-top: 10px;
+   
+    
+     
+}
+
+.cartproducts{
+
+    position: static;
+    margin-left: 20%;
+    margin-top: 5%;
+   
+   
+   
+    
+  
+}
+.list{
+ border: 1px solid black;
+  border-radius: 10px;
+   width: 400px;
+    height: fit-content;
+    padding: 50px;
+}
