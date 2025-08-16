@@ -21,7 +21,7 @@ const productApi= await axios.get(producturl)
 setProductdata(productApi.data)
 }
 console.log(productdata)
-
+// hi iam dhina
 
 productfn()
    },[])
