@@ -1,5 +1,5 @@
 import React from 'react'
-import { addtocart,removefromcart } from '../redux/slicemyntra'
+import { addtocart,removefromcart ,increasequantity,decreasequantity} from '../redux/slicemyntra'
 import { useDispatch, useSelector } from 'react-redux'
 import cartstyles from  "./cartpage.module.css"
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -15,11 +15,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
   const removecart=(item)=>{
     cartdispatch(removefromcart(item))
   }
-  const addquantity=()=>{
+  const addquantity = (item) => {
+  cartdispatch(increasequantity({ id: item.id }));
+};
 
-
-    
-  }
+const removequantity = (item) => {
+  cartdispatch(decreasequantity({ id: item.id }));
+};
+const totalAmount = cartitems.reduce((sum, item) => sum + (item.totalprice || 0), 0);
   return (
     <>
     <div style={{display:"flex",width:"fitcontent"}}>  
@@ -42,8 +45,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
        
         
        <div style={{display:'flex',alignItems:'center',justifyContent:'space-around',width:'15px',textAlign:'center',gap:'10px'}}>
-        <button className="btn btn-outline-success mb-2">-</button><p>0</p>
-       <button className="btn btn-outline-success mb-2"onClick={addquantity()}>+</button></div>
+        <button className="btn btn-outline-success mb-2"onClick={()=>removequantity(item)}>-</button><p>{item.quantity}</p>
+       <button className="btn btn-outline-success mb-2"onClick={()=>addquantity(item)}>+</button></div>
         <button className='btn btn-warning'onClick={()=>removecart(item)}>remove from cart</button>
        
         </div>
@@ -56,7 +59,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
        <div className= {cartstyles.cartproducts}>{cartitems.length>0  ? <div className={cartstyles.list}><p>Total MRP:</p>
        <p>Platform Fee:</p>
        <p>Delivery Charge:</p>
-       <h3>Total Amount:</h3>
+       <h3>Total Amount:{totalAmount}</h3>
        <button className="btn btn-danger btn-lg w-100">Place Order</button>
        </div>
                  
