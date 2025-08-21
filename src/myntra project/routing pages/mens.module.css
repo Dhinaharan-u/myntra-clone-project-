@@ -19,7 +19,7 @@
  
   text-align: center;
   border-radius: 5px;
-  overflow: hidden;          /* 💡 This is critical */
+  overflow: hidden;         
   box-sizing: border-box;
   background-color: white;
   
@@ -45,5 +45,21 @@
    background-color: white;
    margin-left: 20px;
   
+}
+.imageWrapper{
+   position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.ratingBadge{
+   position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 

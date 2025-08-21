@@ -12,9 +12,14 @@ const itemexist=state.cart.find(item=>item.id===cartitems.id)
 
            if(itemexist){
             itemexist.quantity+=1
-            itemexist.totalprice=itemexist.quantity*itemexist.price
+            itemexist.totalprice=itemexist.quantity*Number(itemexist.price)
            }else{
-            state.cart.push({...cartitems,quantity:1,totalprice:cartitems.Price,})
+           state.cart.push({
+  ...cartitems,
+  quantity: 1,
+  price: Number(cartitems.price),          
+  totalprice: Number(cartitems.price),      
+});
            }
            
         },
@@ -22,7 +27,7 @@ const itemexist=state.cart.find(item=>item.id===cartitems.id)
 const item=state.cart.find(item=>item.id===action.payload.id)
 if(item){
     item.quantity+=1
-    item.totalprice=item.quantity*item.price
+    item.totalprice=item.quantity*Number(item.price)
 }
         },
 
@@ -30,7 +35,7 @@ if(item){
 const item = state.cart.find(item => item.id === action.payload.id);
       if (item && item.quantity > 1) {
         item.quantity -= 1;
-        item.totalPrice = item.quantity * item.price;
+        item.totalprice = item.quantity * Number(item.price);
       } else {
         
         state.cart = state.cart.filter(i => i.id !== action.payload.id);

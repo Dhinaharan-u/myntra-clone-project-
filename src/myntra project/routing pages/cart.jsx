@@ -38,7 +38,7 @@ const totalAmount = cartitems.reduce((sum, item) => sum + (item.totalprice || 0)
 />
         <div className={cartstyles.cartdetail}>
         <p>Name:{item.name}</p>
-        <p>MRP:<s>{item.MRP}/-</s><br></br>
+        <p>MRP:<s>{item.MRP}/-)</s><br></br>
           Price:{item.price}/-only</p>
         <p>Brand:{item.brand}</p>
         <p>7days return available</p>

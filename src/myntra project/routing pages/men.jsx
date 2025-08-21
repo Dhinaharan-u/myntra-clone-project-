@@ -7,36 +7,35 @@ import { useDispatch } from 'react-redux'
 import { addtocart } from '../redux/slicemyntra' 
 import { addtowishlist } from '../redux/whishlistredux'
 import { useSelector } from 'react-redux'
+import { sortfn,newsortfn } from '../redux/sortslice'
  const Men = () => {
 const dispatch =useDispatch()
 const mycart=useSelector(state=>state.addcart.cart)
 const newwishlist=useSelector(state=>state.addwishlist.mywishlist)
 const [wishlist,setWishlist]=useState(new Set())
 
-const [productdata,setProductdata]=useState([])
+const productdata=useSelector(state=>state.actualsortproduct.resultsort)
    useEffect(()=>{
 const productfn=async()=>{
 const producturl="http://localhost:3001/products"
 const productApi= await axios.get(producturl)
-setProductdata(productApi.data)
+dispatch(sortfn(productApi.data))
 }
 console.log(productdata)
-// hi iam dhina
+
 
 productfn()
    },[])
 
    const addcartbtn=(product)=>{
-    // const exists =mycart.some(item=>item.id===product.id)
-    // if(!exists){
+    
       dispatch(addtocart(product))
-    // }else{
-    //   alert("the product is already in your cart")
+    
     }
 
 
    
-   const addwishlisttbtn=(product,index)=>{
+   const addwishlisttbtn=(product)=>{
 
     const btnlist=newwishlist.some(item=>item.id===product.id)
     if(!btnlist){
@@ -47,10 +46,10 @@ dispatch(addtowishlist(product))
 
 setWishlist((prev) => {
     const newSet = new Set(prev);
-    if (newSet.has(index)) {
-      newSet.delete(index);
+    if (newSet.has(product.id)) {
+      newSet.delete(product.id);
     } else {
-      newSet.add(index);
+      newSet.add(product.id);
     }
     return newSet;
    })
@@ -60,13 +59,31 @@ setWishlist((prev) => {
 console.log(productdata)
   return (
    <>
-   <div className={styles.products}>{productdata.map((product,index)=>{
+   <div className="container mt-3 " style={{marginLeft:'15px'}}>
+  <div className="d-flex justify-content-start">
+    <select
+      className="form-select form-select-sm w-auto border-secondary rounded-1 "
+      onChange={(e) => dispatch(newsortfn(e.target.value))}
+      defaultValue=" "
+    >
+      <option disabled value=" ">
+        Sort by
+      </option>
+      <option value="low to high">Price: Low to High</option>
+      <option value="high to low">Price: High to Low</option>
+      <option value="no sort">No Sort</option>
+    </select>
+  </div>
+</div>
+
+
+   <div className={styles.products}>{productdata.map((product,id)=>{
     return(
-    <div className={styles.productitems} key={index}>
+    <div className={styles.productitems} key={id}>
       
       
-      
-       {product.imgURIs?.[0] ? (
+      <div className={styles.imageWrapper}>
+        {product.imgURIs?.[0] ? (
             <img className={styles.productimage}
               src={product.imgURIs[0]}
              alt='image is loading'
@@ -75,24 +92,33 @@ console.log(productdata)
           ) : (
             <p>No image available</p>
           )}
-           <p >Name:{product.name}</p>
+          <span className={styles.ratingBadge }
 
-          <p>MRP:<s>{product.MRP}/-</s><br></br>
+          >⭐ {product.rating}</span>
+      </div>
+       
+           <p >{product.name}</p>
+
+          <p>MRP:<s>{product.MRP}/-</s>({product.discount }%OFF)<br></br>
           Price:{product.price}/-only</p>
          
-          <p>Discount:{product.discount}%</p>
+          
           
           <p>Brand:{product.brand}</p>
-          <p>Rating:{product.rating}</p>
+          
           <button className='btn bg-info ' style={{marginLeft:'45px'}} 
           onClick={()=>addcartbtn(product)}>Add to Cart</button>
           
-         <button className={styles.button}><p
-  onClick={() => addwishlisttbtn(product, index)}
-  style={{ color: wishlist.has(index) ? 'red' : 'white' }}
->
-  {wishlist.has(index) ? '❤️' : '🤍'}
-</p></button> 
+         <button className={styles.button}>
+  <p
+    onClick={() => addwishlisttbtn(product)}
+    style={{
+      color: newwishlist.some(item => item.id === product.id) ? 'red' : 'white'
+    }}
+  >
+    {newwishlist.some(item => item.id === product.id) ? '❤️' : '🤍'}
+  </p>
+</button>
    </div>)
     
    })}</div>
