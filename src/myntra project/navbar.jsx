@@ -2,11 +2,16 @@ import React from 'react'
 import navbarstyles from './navbar.module.css'
 import { Link } from 'react-router-dom'
 import navbarlogo from "../assets/logo image.jfif"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addtowishlist } from './redux/whishlistredux'
+import { searchfn } from './redux/sortslice'
  const Navbar = () => {
+   const dispatch=useDispatch()
   const countwishlist=useSelector((state)=>state.addwishlist.mywishlist)
   const countcart=useSelector((state)=>state.addcart.cart)
+  const handleSearch = (e) => {
+    dispatch(searchfn(e.target.value));
+  };
   return (
     <>
     <div className={ navbarstyles.navbar}>
@@ -23,7 +28,7 @@ import { addtowishlist } from './redux/whishlistredux'
             
         </div>
         <hr></hr>
-        <input placeholder='Search for products,brands and more'></input>
+        <input placeholder='Search for products,brands and more' onChange={handleSearch}></input>
        <Link to={'/wishlist'} style={{ textDecoration: "none", color: 'black', position: 'relative' }}>
   <p style={{ textAlign: "center" }}>
     🤍<br />Wishlist

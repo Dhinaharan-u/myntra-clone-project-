@@ -7,7 +7,9 @@ import { useDispatch } from 'react-redux'
 import { addtocart } from '../redux/slicemyntra' 
 import { addtowishlist } from '../redux/whishlistredux'
 import { useSelector } from 'react-redux'
-import { sortfn,newsortfn } from '../redux/sortslice'
+import { sortfn,newsortfn ,searchfn} from '../redux/sortslice'
+import { removewishlist } from '../redux/whishlistredux'
+import { toast } from 'react-toastify'
  const Men = () => {
 const dispatch =useDispatch()
 const mycart=useSelector(state=>state.addcart.cart)
@@ -30,8 +32,10 @@ productfn()
    const addcartbtn=(product)=>{
     
       dispatch(addtocart(product))
-    
+      toast.success("Added to cart successfully")
     }
+
+    
 
 
    
@@ -40,8 +44,10 @@ productfn()
     const btnlist=newwishlist.some(item=>item.id===product.id)
     if(!btnlist){
 dispatch(addtowishlist(product))
+toast.success("Added to Wishlist ❤️");
     }else{
-      alert("this product is already in your wishlist")
+      dispatch(removewishlist(product))
+      toast.info("Removed from Wishlist 💔");
     }
 
 setWishlist((prev) => {
@@ -83,9 +89,9 @@ console.log(productdata)
       
       
       <div className={styles.imageWrapper}>
-        {product.imgURIs?.[0] ? (
+        {product.imgURIs?.[2] ? (
             <img className={styles.productimage}
-              src={product.imgURIs[0]}
+              src={product.imgURIs[2]}
              alt='image is loading'
               
             />
@@ -104,7 +110,7 @@ console.log(productdata)
          
           
           
-          <p>Brand:{product.brand}</p>
+          <h5>Brand:{product.brand}</h5>
           
           <button className='btn bg-info ' style={{marginLeft:'45px'}} 
           onClick={()=>addcartbtn(product)}>Add to Cart</button>

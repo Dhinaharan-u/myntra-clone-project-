@@ -10,6 +10,8 @@ import Wishlist from './myntra project/routing pages/wishlist'
 import Profile from './myntra project/routing pages/Profile'
 import Cart from './myntra project/routing pages/cart'
 import store from './myntra project/redux/store'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
  const App = () => {
 
   
@@ -27,7 +29,7 @@ import store from './myntra project/redux/store'
       
     </Routes>
    
-    
+    <ToastContainer position="top-right" autoClose={2000} />
     
     </>
   )

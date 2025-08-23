@@ -3,12 +3,14 @@ import { addtowishlist } from '../redux/whishlistredux'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from  "./mens.module.css"
 import { removewishlist } from '../redux/whishlistredux'
+import { toast } from 'react-toastify'
  const Wishlist = () => {
    const wishlist=useSelector(state=>state.addwishlist.mywishlist)
    const dispatch =useDispatch()
 
    const remove=(item)=>{
     dispatch(removewishlist(item))
+    toast.info("Removed from Wishlist 💔");
    }
   return (
     <>

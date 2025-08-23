@@ -3,6 +3,7 @@ import { addtocart,removefromcart ,increasequantity,decreasequantity} from '../r
 import { useDispatch, useSelector } from 'react-redux'
 import cartstyles from  "./cartpage.module.css"
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { toast } from 'react-toastify'
 
 
  const Cart = () => {
@@ -14,6 +15,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
   const removecart=(item)=>{
     cartdispatch(removefromcart(item))
+    toast.info("Removed from cart");
   }
   const addquantity = (item) => {
   cartdispatch(increasequantity({ id: item.id }));
@@ -38,7 +40,7 @@ const totalAmount = cartitems.reduce((sum, item) => sum + (item.totalprice || 0)
 />
         <div className={cartstyles.cartdetail}>
         <p>Name:{item.name}</p>
-        <p>MRP:<s>{item.MRP}/-)</s><br></br>
+        <p>MRP:<s>{item.MRP}/-</s><br></br>
           Price:{item.price}/-only</p>
         <p>Brand:{item.brand}</p>
         <p>7days return available</p>

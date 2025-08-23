@@ -24,11 +24,15 @@ const sortSlice=createSlice({
                else if(action.payload==="nosort"){
                 state.resultsort=state.actualsort
               } 
-              
+            },
+            searchfn: (state, action) => {
+      const searchQuery = action.payload.toLowerCase();
+      state.resultsort = state.actualsort.filter(product =>
+        product.name.toLowerCase().includes(searchQuery)
+      );
+    }
 
-
-        }
     }
 })
-export const{sortfn,newsortfn}=sortSlice.actions
+export const{sortfn,newsortfn,searchfn}=sortSlice.actions
 export default sortSlice.reducer
