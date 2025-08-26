@@ -1,6 +1,6 @@
 import React from 'react'
 import {createBrowserRouter,BrowserRouter,Routes,Route } from 'react-router-dom'
-import Navbar from './myntra project/navbar'
+
 import Men from './myntra project/routing pages/men'
 
 import Home from './myntra project/routing pages/home'
@@ -12,15 +12,17 @@ import Cart from './myntra project/routing pages/cart'
 import store from './myntra project/redux/store'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Login from './myntra project/routing pages/Login'
  const App = () => {
 
   
   return (
     <>
-    <Navbar/>
+    
    
     <Routes>
-      <Route path='/'element={<Home/>}/>
+      <Route path='/'element={<Login/>}/>
+      <Route path='/home'element={<Home/>}/>
       <Route path='/men'element={<Men/>}/>
       <Route path='/*'element={<Error/>}/>
        <Route path='/wishlist'element={<Wishlist/>}/>

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import cartstyles from  "./cartpage.module.css"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { toast } from 'react-toastify'
+import Navbar from '../navbar'
 
 
  const Cart = () => {
@@ -27,6 +28,7 @@ const removequantity = (item) => {
 const totalAmount = cartitems.reduce((sum, item) => sum + (item.totalprice || 0), 0);
   return (
     <>
+    <Navbar/>
     <div style={{display:"flex",width:"fitcontent"}}>  
       <div className={cartstyles.products}>{cartitems.length==0?<img  style={{ height:'300px' ,marginTop:'50px'
       ,marginLeft:'500px',position:'static'}} 

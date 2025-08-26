@@ -15,7 +15,7 @@ import { searchfn } from './redux/sortslice'
   return (
     <>
     <div className={ navbarstyles.navbar}>
-       <Link to={"/"}><img  className={navbarstyles.navlogoimage}src={navbarlogo}></img></Link>
+       <Link to={"/home"}><img  className={navbarstyles.navlogoimage}src={navbarlogo}></img></Link>
 
         
         <div className={navbarstyles.navicons}>

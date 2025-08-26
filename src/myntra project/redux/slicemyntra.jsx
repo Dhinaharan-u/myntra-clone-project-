@@ -16,7 +16,7 @@ const itemexist=state.cart.find(item=>item.id===cartitems.id)
            }else{
            state.cart.push({
   ...cartitems,
-  quantity: 1,
+  quantity:1,
   price: Number(cartitems.price),          
   totalprice: Number(cartitems.price),      
 });
@@ -33,13 +33,10 @@ if(item){
 
         decreasequantity:(state,action)=>{
 const item = state.cart.find(item => item.id === action.payload.id);
-      if (item && item.quantity > 1) {
+      if (item.quantity > 1) {
         item.quantity -= 1;
         item.totalprice = item.quantity * Number(item.price);
-      } else {
-        
-        state.cart = state.cart.filter(i => i.id !== action.payload.id);
-      }
+      } 
             
         },
         removefromcart:(state,action)=>{

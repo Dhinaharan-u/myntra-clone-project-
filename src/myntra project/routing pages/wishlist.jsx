@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from  "./mens.module.css"
 import { removewishlist } from '../redux/whishlistredux'
 import { toast } from 'react-toastify'
+import Navbar from '../navbar'
  const Wishlist = () => {
    const wishlist=useSelector(state=>state.addwishlist.mywishlist)
    const dispatch =useDispatch()
@@ -14,7 +15,7 @@ import { toast } from 'react-toastify'
    }
   return (
     <>
-     
+     <Navbar/>
 
 
     <div  className={styles.products}>{ wishlist.length==0?<img  style={{height:'500px'}} 

@@ -21,7 +21,7 @@ const sortSlice=createSlice({
         else if(action.payload==="high to low"){
                 state.resultsort=[...state.resultsort].sort((a,b)=>b.price-a.price)
               } 
-               else if(action.payload==="nosort"){
+               else if(action.payload==="no sort"){
                 state.resultsort=state.actualsort
               } 
             },

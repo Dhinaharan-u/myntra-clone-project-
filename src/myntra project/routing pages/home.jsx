@@ -5,8 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import Navbar from '../navbar';
+
 
  const Home = () => {
+  
   
 const [sliderapi,setSliderapi]=useState([])
   
@@ -33,6 +36,7 @@ console.log(sliderapi)
 
   return (
    <>
+   <Navbar/>
    <div  style={{ width: '80%', margin: 'auto',marginTop:'10px' }} >
     <Slider {...settings}>
       {sliderapi.map((sliderimage,index)=>{

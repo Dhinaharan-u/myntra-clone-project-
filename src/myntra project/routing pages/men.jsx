@@ -10,11 +10,13 @@ import { useSelector } from 'react-redux'
 import { sortfn,newsortfn ,searchfn} from '../redux/sortslice'
 import { removewishlist } from '../redux/whishlistredux'
 import { toast } from 'react-toastify'
+import Navbar from '../navbar'
  const Men = () => {
 const dispatch =useDispatch()
 const mycart=useSelector(state=>state.addcart.cart)
 const newwishlist=useSelector(state=>state.addwishlist.mywishlist)
 const [wishlist,setWishlist]=useState(new Set())
+
 
 const productdata=useSelector(state=>state.actualsortproduct.resultsort)
    useEffect(()=>{
@@ -33,6 +35,7 @@ productfn()
     
       dispatch(addtocart(product))
       toast.success("Added to cart successfully")
+      setDisabled(prev=>({...prev,id:true}))
     }
 
     
@@ -65,6 +68,7 @@ setWishlist((prev) => {
 console.log(productdata)
   return (
    <>
+   <Navbar/>
    <div className="container mt-3 " style={{marginLeft:'15px'}}>
   <div className="d-flex justify-content-start">
     <select
@@ -113,7 +117,7 @@ console.log(productdata)
           <h5>Brand:{product.brand}</h5>
           
           <button className='btn bg-info ' style={{marginLeft:'45px'}} 
-          onClick={()=>addcartbtn(product)}>Add to Cart</button>
+          onClick={()=>addcartbtn(product)}  disabled={mycart.some(item => item.id === product.id)}  >{mycart.some(update=>update.id==product.id)?"Added":"Add to cart"}</button>
           
          <button className={styles.button}>
   <p
